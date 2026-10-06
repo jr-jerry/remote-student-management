@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 public class StudentController {
@@ -24,8 +26,13 @@ public class StudentController {
 //    http://localhost:8080/api/user/update?name=gautam
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String updateEndpoint(@RequestParam String name,@RequestBody Student studentData){
-        studentService.updateStudenService(name,studentData);
-        return "Update succesfully";
+    public StudentDTO updateEndpoint(@RequestParam String name,@RequestBody StudentDTO studentDTO){
+        return studentService.updateStudenService(name,studentDTO);
+//        return "Update succesfully";
+    }
+
+    @GetMapping("/all")
+    public List<StudentDTO> getAllEndpoint(){
+        return studentService.getAll();
     }
 }

@@ -3,27 +3,28 @@ package com.first_db_crud.student_management.Service;
 import com.first_db_crud.student_management.DTO.StudentDTO;
 import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Repository.StudentRep;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-    public StudentServiceImpl(StudentRep studentRep) {
+    public StudentServiceImpl(ModelMapper modelMapper, StudentRep studentRep) {
+        this.modelMapper = modelMapper;
         this.studentRep = studentRep;
     }
 
+    private final ModelMapper modelMapper;
     private final StudentRep studentRep;
 
     @Override
     public StudentDTO save(StudentDTO studentDTO) {
-        Student studentEntity=new Student();
-
-        studentEntity.setName(studentDTO.getName());
-        studentEntity.setAge(studentDTO.getAge());
+         Student studentEntity=this.modelMapper.map(studentDTO,Student.class);
 
         Student savedStudent=this.studentRep.save(studentEntity);
-        return studentDTO;
+        return this.modelMapper.map(savedStudent,StudentDTO.class);
     }
     @Override
     public void delete(String name) {
@@ -37,12 +38,20 @@ public class StudentServiceImpl implements StudentService{
                             .orElseThrow(()->new RuntimeException("No user Found with this name "));
     }
     @Override
-    public Student updateStudenService(String name, Student updatedData) {
+    public StudentDTO updateStudenService(String name, StudentDTO studentDTO) {
          Student student_in_DB=studentRep.findByName(name)
                  .orElseThrow(()->new RuntimeException("No user found with this name "));
 
-         student_in_DB.setAge(updatedData.getAge());
-         student_in_DB.setName(updatedData.getName());
-         return studentRep.save(student_in_DB);
+         student_in_DB.setAge(studentDTO.getAge());
+         student_in_DB.setName(studentDTO.getName());
+
+         Student savedStudent=studentRep.save(student_in_DB);
+        return this.modelMapper.map(savedStudent, StudentDTO.class);
+
+    }
+
+    @Override
+    public List<StudentDTO> getAll() {
+        return studentRep.findAll().stream().map(entity->modelMapper.map(entity,StudentDTO.class)).toList();
     }
 }
