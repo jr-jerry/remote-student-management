@@ -17,18 +17,16 @@ public class StudentController {
     }
 
     private final StudentService studentService;
+
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
     public StudentDTO createEndpoint(@RequestBody StudentDTO studentDTO) {
         return studentService.save(studentDTO);
-//        return "Save sucessfull";
+
     }
-//    http://localhost:8080/api/user/update?name=gautam
+
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public StudentDTO updateEndpoint(@RequestParam String name,@RequestBody StudentDTO studentDTO){
-        return studentService.updateStudenService(name,studentDTO);
-//        return "Update succesfully";
+    public ResponseEntity<?> updateEndpoint(@RequestParam String name,@RequestBody StudentDTO studentDTO){
+         return  new ResponseEntity<StudentDTO>(studentService.updateStudenService(name,studentDTO), HttpStatus.OK);
     }
 
     @GetMapping("/all")
