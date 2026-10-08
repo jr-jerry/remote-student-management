@@ -11,6 +11,5 @@ import tools.jackson.databind.annotation.JsonNaming;
 public class StudentDTO {
     private String name;
 //    @JsonProperty( "user age ")
-    @JsonIgnore
     private Integer age;
 }
