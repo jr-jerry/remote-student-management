@@ -3,6 +3,7 @@ package com.first_db_crud.student_management.Controller;
 import com.first_db_crud.student_management.DTO.StudentDTO;
 import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class StudentController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateEndpoint(@RequestParam String name,@RequestBody StudentDTO studentDTO){
+    public ResponseEntity<?> updateEndpoint(@RequestParam String name,@Valid @RequestBody StudentDTO studentDTO){
          return  new ResponseEntity<StudentDTO>(studentService.updateStudenService(name,studentDTO), HttpStatus.OK);
     }
 

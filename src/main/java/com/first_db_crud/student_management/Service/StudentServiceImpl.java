@@ -5,12 +5,13 @@ import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Exception.StudentNotFoundException;
 import com.first_db_crud.student_management.Repository.StudentRep;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service 
 public class StudentServiceImpl implements StudentService{
     public StudentServiceImpl(ModelMapper modelMapper, StudentRep studentRep) {
         this.modelMapper = modelMapper;
