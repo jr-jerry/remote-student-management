@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class StudentServiceImpl implements StudentService{
     private final StudentRep studentRep;
 
     @Override
-    public StudentDTO save(StudentDTO studentDTO) {
+    public StudentDTO save(StudentDTO studentDTO)  {
          Student studentEntity=this.modelMapper.map(studentDTO,Student.class);
 
         Student savedStudent=this.studentRep.save(studentEntity);
