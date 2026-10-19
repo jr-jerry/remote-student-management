@@ -24,13 +24,5 @@ public class Beans {
     public ModelMapper getModelMapper(){
         return new ModelMapper();
     }
-    @Bean
-    public static DataSource getDataSource(){
-        DataSourceBuilder<?> dataSourceBuilder=DataSourceBuilder.create();
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/user_db");
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.username("admin");
-        dataSourceBuilder.password("admin112233admin");
-        return dataSourceBuilder.build();
-    }
+
 }

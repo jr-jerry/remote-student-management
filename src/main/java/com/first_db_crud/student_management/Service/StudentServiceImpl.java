@@ -1,6 +1,7 @@
 package com.first_db_crud.student_management.Service;
 
 import com.first_db_crud.student_management.DTO.StudentDTO;
+import com.first_db_crud.student_management.Entity.Aadhar;
 import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Exception.StudentNotFoundException;
 import com.first_db_crud.student_management.Repository.StudentRep;
@@ -25,6 +26,10 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public StudentDTO save(StudentDTO studentDTO)  {
          Student studentEntity=this.modelMapper.map(studentDTO,Student.class);
+         Aadhar aadhar=new Aadhar();
+         aadhar.setAadhar_no(studentDTO.getAadhar() .getAadhar_no());
+
+         studentEntity.setAdhar(aadhar);
 
         Student savedStudent=this.studentRep.save(studentEntity);
         return this.modelMapper.map(savedStudent,StudentDTO.class);
