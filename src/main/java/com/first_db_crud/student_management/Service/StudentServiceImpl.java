@@ -29,10 +29,18 @@ public class StudentServiceImpl implements StudentService{
          Aadhar aadhar=new Aadhar();
          aadhar.setAadhar_no(studentDTO.getAadhar() .getAadhar_no());
 
+         aadhar.setStudent(studentEntity);
          studentEntity.setAdhar(aadhar);
 
         Student savedStudent=this.studentRep.save(studentEntity);
-        return this.modelMapper.map(savedStudent,StudentDTO.class);
+//        return this.modelMapper.map(savedStudent,StudentDTO.class);
+        StudentDTO studentResponseDTO=new StudentDTO();
+        studentResponseDTO.setName(savedStudent.getName());
+        studentResponseDTO.setAge(savedStudent.getAge());
+
+
+        studentResponseDTO.setAadhar(aadhar);
+        return studentResponseDTO;
     }
     @Override
     public void delete(String name) {
