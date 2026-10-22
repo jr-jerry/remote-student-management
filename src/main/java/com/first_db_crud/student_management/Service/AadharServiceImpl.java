@@ -1,6 +1,7 @@
 package com.first_db_crud.student_management.Service;
 
 import com.first_db_crud.student_management.Entity.Aadhar;
+import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Repository.AadharRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,14 @@ public class AadharServiceImpl implements AadharService {
         System.out.println("Aadhar:" + aadharEntity);
         return aadharEntity;
 
+    }
+
+    @Override
+    public Student findStudentByAadharNumber(String aadharNumber) {
+        Aadhar aadharEntity=findByAadharNumber(aadharNumber);
+        Student studentEntity=new Student();
+        studentEntity.setAge(aadharEntity.getStudent().getAge());
+        studentEntity.setName(aadharEntity.getStudent().getName());
+        return studentEntity;
     }
 }
