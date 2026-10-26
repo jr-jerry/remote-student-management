@@ -2,7 +2,8 @@ package com.first_db_crud.student_management.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.first_db_crud.student_management.Entity.Aadhar;
+
+import com.first_db_crud.student_management.Entity.Teacher;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -16,5 +17,5 @@ public class StudentDTO {
     private String name;
     @Min(value = 10, message = "Age should be greater then 10")
     private Integer age;
-    private Aadhar aadhar;
+    private Teacher teacher;
 }
