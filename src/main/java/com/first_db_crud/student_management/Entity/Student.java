@@ -20,7 +20,4 @@ public class Student {
     private String name;
 //    @JsonIgnore
     private Integer age;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Aadhar adhar;
 }
