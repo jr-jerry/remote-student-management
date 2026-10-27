@@ -9,8 +9,10 @@ import java.util.Optional;
 
 public interface StudentService {
     StudentDTO save(StudentDTO studentDTO)  ;
+    StudentDTO saveStudentOnly(StudentDTO studentDTO);
     void delete(String name);
     Student findByNameService(String name);
     StudentDTO updateStudenService(String name,StudentDTO studentDTO);
     List<StudentDTO> getAll();
+    StudentDTO assingTeacherStudent(String teacherName,String studentName);
 }

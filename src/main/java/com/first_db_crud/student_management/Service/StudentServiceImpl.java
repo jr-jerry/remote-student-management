@@ -48,6 +48,13 @@ public class StudentServiceImpl implements StudentService{
         Student savedStudent=this.studentRep.save(studentEntity);
         return this.modelMapper.map(savedStudent,StudentDTO.class);
     }
+
+    @Override
+    public StudentDTO saveStudentOnly(StudentDTO studentDTO) {
+        Student studentEntity=this.modelMapper.map(studentDTO,Student.class);
+        return this.modelMapper.map(this.studentRep.save(studentEntity),StudentDTO.class);
+    }
+
     @Override
     public void delete(String name) {
         Student student=studentRep.findByName(name)
@@ -75,5 +82,14 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public List<StudentDTO> getAll() {
         return studentRep.findAll().stream().map(entity->modelMapper.map(entity,StudentDTO.class)).toList();
+    }
+
+    @Override
+    public StudentDTO assingTeacherStudent(String teacherName, String studentName) {
+         Student studentEntity=studentRep.findByName(studentName).orElseThrow(()->new StudentNotFoundException("Student not found"));
+         Teacher teacherEntity=teacherService.findTeacherByName(teacherName);
+
+         studentEntity.setTeacher(teacherEntity);
+         return this.modelMapper.map(studentRep.save(studentEntity),StudentDTO.class);
     }
 }

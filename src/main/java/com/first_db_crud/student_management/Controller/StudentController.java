@@ -4,6 +4,7 @@ import com.first_db_crud.student_management.DTO.StudentDTO;
 import com.first_db_crud.student_management.Entity.Student;
 import com.first_db_crud.student_management.Service.StudentService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,17 @@ public class StudentController {
 
     @PostMapping("/create")
     public StudentDTO createEndpoint(@RequestBody StudentDTO studentDTO) {
-        return studentService.save(studentDTO);
+        return studentService.saveStudentOnly(studentDTO);
 
     }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateEndpoint(@RequestParam String name,@Valid @RequestBody StudentDTO studentDTO){
          return  new ResponseEntity<StudentDTO>(studentService.updateStudenService(name,studentDTO), HttpStatus.OK);
+    }
+    @PutMapping("/assing-teacher")
+    public ResponseEntity<?> assingTeacherEndpoint(@RequestParam String teacherName,@RequestParam String studentName){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.assingTeacherStudent(teacherName,studentName));
     }
 
     @GetMapping("/all")
