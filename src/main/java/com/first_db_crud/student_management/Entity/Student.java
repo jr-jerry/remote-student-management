@@ -21,5 +21,6 @@ public class Student {
 //    @JsonIgnore
     private Integer age;
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Teacher teacher;
 }

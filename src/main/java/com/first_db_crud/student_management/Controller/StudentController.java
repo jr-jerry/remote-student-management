@@ -23,7 +23,6 @@ public class StudentController {
     @PostMapping("/create")
     public StudentDTO createEndpoint(@RequestBody StudentDTO studentDTO) {
         return studentService.saveStudentOnly(studentDTO);
-
     }
 
     @PutMapping("/update")

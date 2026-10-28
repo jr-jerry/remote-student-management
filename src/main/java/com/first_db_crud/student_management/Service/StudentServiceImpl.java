@@ -18,8 +18,6 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class StudentServiceImpl implements StudentService{
-
-
     public StudentServiceImpl(ModelMapper modelMapper, StudentRep studentRep, TeacherService teacherService) {
         this.modelMapper = modelMapper;
         this.studentRep = studentRep;
@@ -89,6 +87,7 @@ public class StudentServiceImpl implements StudentService{
          Student studentEntity=studentRep.findByName(studentName).orElseThrow(()->new StudentNotFoundException("Student not found"));
          Teacher teacherEntity=teacherService.findTeacherByName(teacherName);
 
+         teacherEntity.getStudents().add(studentEntity);
          studentEntity.setTeacher(teacherEntity);
          return this.modelMapper.map(studentRep.save(studentEntity),StudentDTO.class);
     }

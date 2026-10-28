@@ -1,14 +1,13 @@
 package com.first_db_crud.student_management.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +21,6 @@ public class Teacher {
     private Integer id;
     private String name;
     private String subject;
+    @OneToMany(mappedBy = "teacher")
+    private List<Student> students;
 }
